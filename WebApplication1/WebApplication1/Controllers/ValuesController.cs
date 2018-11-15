@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -10,6 +11,13 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly DatabaseContext _context;
+
+
+        public ValuesController(DatabaseContext context)
+        {
+            _context = context;
+        }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
