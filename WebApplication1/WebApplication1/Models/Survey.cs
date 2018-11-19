@@ -9,7 +9,7 @@ namespace WebApplication1.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Company Comapny { get; set; }
+        public Company Comapny { get; set; } // fix naam
         public List<SurveyUser> SurveyUsers { get; set; }
         public List<Question> Questions { get; set; }
 
