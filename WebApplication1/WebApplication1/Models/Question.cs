@@ -9,7 +9,8 @@ namespace WebApplication1.Models
     {
         public int Id { get; set; }
         public string _Question { get; set; }
-        public List<Answer> Answers { get; set; }
+        public List<ClosedAnswer> ClosedAnswers { get; set; }
+        public OpenAnswer OpenAnswer { get; set; }
 
     }
 }

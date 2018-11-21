@@ -9,7 +9,10 @@ namespace WebApplication1.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Company Comapny { get; set; } // fix naam
+        public string Description { get; set; }
+        public Company Company { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public List<SurveyUser> SurveyUsers { get; set; }
         public List<Question> Questions { get; set; }
 

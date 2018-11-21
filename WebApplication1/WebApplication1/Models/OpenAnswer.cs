@@ -9,9 +9,10 @@ namespace WebApplication1.Models
     public class OpenAnswer
     {
         public int Id { get; set; }
-        public string _Answer { get; set; }
+        public string Answer { get; set; }
+        public string GivenAnswer { get; set; }
 
-        [ForeignKey("Answer")]
-        public Answer answer { get; set; }
+        [ForeignKey("Question")]
+        public Question question { get; set; }
     }
 }
