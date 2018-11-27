@@ -27,16 +27,17 @@ namespace WebApplication1.Controllers
             return _context.SurveyUser;
         }
 
-        // GET: api/SurveyUsers/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSurveyUser([FromRoute] int id)
+        // GET: api/SurveyUsers/5/3
+        [HttpGet("{id}/{surveyId}")]
+        public async Task<IActionResult> GetSurveyUser([FromRoute] int userId, [FromRoute] int surveyId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var surveyUser = await _context.SurveyUser.FindAsync(id);
+            var surveyUser = await _context.SurveyUser.FirstOrDefaultAsync(u => u.UserId == userId && u.SurveyId == surveyId);
+
 
             if (surveyUser == null)
             {
@@ -90,36 +91,66 @@ namespace WebApplication1.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.SurveyUser.Add(surveyUser);
-            try
+            if (FilledSurvey(surveyUser))
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (SurveyUserExists(surveyUser.SurveyId))
+                _context.SurveyUser.Add(surveyUser);
+
+                try
                 {
-                    return new StatusCodeResult(StatusCodes.Status409Conflict);
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateException)
                 {
-                    throw;
+                    if (SurveyUserExists(surveyUser.SurveyId))
+                    {
+                        return new StatusCodeResult(StatusCodes.Status409Conflict);
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
             }
+            else { return new StatusCodeResult(StatusCodes.Status400BadRequest); }
+
 
             return CreatedAtAction("GetSurveyUser", new { id = surveyUser.SurveyId }, surveyUser);
         }
 
-        // DELETE: api/SurveyUsers/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSurveyUser([FromRoute] int id)
+        private bool FilledSurvey(SurveyUser surveyUser)
+        {
+            bool filled = false;
+
+            foreach (Question q in surveyUser.Survey.Questions)
+            {
+                foreach(ClosedAnswer c in q.ClosedAnswers)
+                {
+                    if (c.Answered)
+                    {
+                        filled = true; 
+                    }
+                    else { filled = false ;  }
+                }
+
+                if (!q.OpenAnswer.UserResponse.Equals(""))
+                {
+                    filled = true;
+                }
+            }   
+
+            return filled;
+        }
+
+        // DELETE: api/SurveyUsers/5/3
+        [HttpDelete("{userId}/{surveyId}")]
+        public async Task<IActionResult> DeleteSurveyUser([FromRoute] int userId, [FromRoute] int surveyId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var surveyUser = await _context.SurveyUser.FindAsync(id);
+            var surveyUser = await _context.SurveyUser.FirstOrDefaultAsync(u => u.UserId == userId && u.SurveyId == surveyId);
             if (surveyUser == null)
             {
                 return NotFound();

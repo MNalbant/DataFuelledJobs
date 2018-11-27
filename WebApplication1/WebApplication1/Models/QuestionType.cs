@@ -9,6 +9,6 @@ namespace WebApplication1.Models
     {
         OpenQuestion,
         ClosedQuestion,
-        OPenClosedQuestion
+        OpenClosedQuestion
     }
 }
