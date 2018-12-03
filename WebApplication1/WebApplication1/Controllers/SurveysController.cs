@@ -27,6 +27,27 @@ namespace WebApplication1.Controllers
             return _context.Surveys;
         }
 
+        // GET: api/Surveys
+        [HttpGet("{sortedOn}")]
+        public IEnumerable<Survey> GetSurveysSorted([FromRoute] int sortedOn)
+        {
+            switch (sortedOn)
+            {
+                case 1:  //Oldest
+                    return _context.Surveys.OrderByDescending(x => x.StartDate); 
+                case 2:  //highest income
+                    return _context.Surveys.OrderByDescending(x => x.Income);
+                case 3:  //Lowest income
+                    return _context.Surveys.OrderBy(x => x.Income);
+                case 4:  //First expiring 
+                    return _context.Surveys.OrderBy(x => x.EndDate);
+                case 5:  //Last expiring
+                    return _context.Surveys.OrderByDescending(x => x.EndDate);
+                default:  //Default newest
+                    return _context.Surveys.OrderBy(x => x.StartDate);  
+            }
+        }
+
         // GET: api/Surveys/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSurvey([FromRoute] int id)
