@@ -38,5 +38,7 @@ namespace WebApplication1.Models
         public DbSet<WebApplication1.Models.Company> Company { get; set; }
 
         public DbSet<WebApplication1.Models.User> User { get; set; }
+
+        public DbSet<WebApplication1.Models.SurveyUser> SurveyUser { get; set; }
     }
 }
