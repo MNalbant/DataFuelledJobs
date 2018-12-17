@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApplication1.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,10 +14,10 @@ namespace WebApplication1.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Number = table.Column<int>(nullable: false),
-                    Addition = table.Column<string>(nullable: true),
-                    ZipCode = table.Column<string>(nullable: true)
+                    StreetName = table.Column<string>(nullable: false),
+                    HouseNumber = table.Column<int>(nullable: false),
+                    Addition = table.Column<string>(nullable: false),
+                    ZipCode = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,7 +30,7 @@ namespace WebApplication1.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,9 +43,12 @@ namespace WebApplication1.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Sex = table.Column<bool>(nullable: false),
                     Mail = table.Column<string>(nullable: true),
-                    Phone = table.Column<int>(nullable: false),
+                    PhoneNumber = table.Column<int>(nullable: false),
+                    Password = table.Column<string>(nullable: true),
                     AddressId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -64,18 +68,22 @@ namespace WebApplication1.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    ComapnyId = table.Column<int>(nullable: true)
+                    Name = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    Income = table.Column<int>(nullable: false),
+                    CompanyId = table.Column<int>(nullable: false),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Surveys", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Surveys_Company_ComapnyId",
-                        column: x => x.ComapnyId,
+                        name: "FK_Surveys_Company_CompanyId",
+                        column: x => x.CompanyId,
                         principalTable: "Company",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -84,7 +92,8 @@ namespace WebApplication1.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    _Question = table.Column<string>(nullable: true),
+                    _Question = table.Column<string>(nullable: false),
+                    QustionType = table.Column<int>(nullable: false),
                     SurveyId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -123,42 +132,23 @@ namespace WebApplication1.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Answer",
-                columns: table => new
-                {
-                    AnswerId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    QuestionId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Answer", x => x.AnswerId);
-                    table.ForeignKey(
-                        name: "FK_Answer_Question_QuestionId",
-                        column: x => x.QuestionId,
-                        principalTable: "Question",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ClosedAnswer",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    _Answer = table.Column<string>(nullable: true),
+                    _ClosedAnswer = table.Column<string>(nullable: false),
                     Answered = table.Column<bool>(nullable: false),
-                    AnswerId = table.Column<int>(nullable: true)
+                    QuestionId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ClosedAnswer", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClosedAnswer_Answer_AnswerId",
-                        column: x => x.AnswerId,
-                        principalTable: "Answer",
-                        principalColumn: "AnswerId",
+                        name: "FK_ClosedAnswer_Question_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Question",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -168,36 +158,32 @@ namespace WebApplication1.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    _Answer = table.Column<string>(nullable: true),
-                    Answer = table.Column<int>(nullable: true)
+                    _OpenAnswer = table.Column<string>(nullable: false),
+                    UserResponse = table.Column<string>(nullable: false),
+                    Question = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OpenAnswer", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OpenAnswer_Answer_Answer",
-                        column: x => x.Answer,
-                        principalTable: "Answer",
-                        principalColumn: "AnswerId",
+                        name: "FK_OpenAnswer_Question_Question",
+                        column: x => x.Question,
+                        principalTable: "Question",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Answer_QuestionId",
-                table: "Answer",
+                name: "IX_ClosedAnswer_QuestionId",
+                table: "ClosedAnswer",
                 column: "QuestionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClosedAnswer_AnswerId",
-                table: "ClosedAnswer",
-                column: "AnswerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OpenAnswer_Answer",
+                name: "IX_OpenAnswer_Question",
                 table: "OpenAnswer",
-                column: "Answer",
+                column: "Question",
                 unique: true,
-                filter: "[Answer] IS NOT NULL");
+                filter: "[Question] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Question_SurveyId",
@@ -205,9 +191,9 @@ namespace WebApplication1.Migrations
                 column: "SurveyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Surveys_ComapnyId",
+                name: "IX_Surveys_CompanyId",
                 table: "Surveys",
-                column: "ComapnyId");
+                column: "CompanyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SurveyUser_UserId",
@@ -232,19 +218,16 @@ namespace WebApplication1.Migrations
                 name: "SurveyUser");
 
             migrationBuilder.DropTable(
-                name: "Answer");
+                name: "Question");
 
             migrationBuilder.DropTable(
                 name: "User");
 
             migrationBuilder.DropTable(
-                name: "Question");
+                name: "Surveys");
 
             migrationBuilder.DropTable(
                 name: "Address");
-
-            migrationBuilder.DropTable(
-                name: "Surveys");
 
             migrationBuilder.DropTable(
                 name: "Company");

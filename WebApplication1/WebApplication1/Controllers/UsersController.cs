@@ -13,7 +13,7 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly DatabaseContext _context;
+        private  DatabaseContext _context;
 
         public UsersController(DatabaseContext context)
         {

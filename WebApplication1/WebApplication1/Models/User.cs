@@ -9,20 +9,20 @@ namespace WebApplication1.Models
     public class User
     {
         public int Id { get; set; }
-        [Required]
+      //  [Required]
         public string FirstName { get; set; }
-        [Required]
+      //  [Required]
         public string LastName { get; set; }
-        [Required]
+       // [Required]
         public bool Sex { get; set; }
-        [Required]
+      //  [Required]
         public string Mail { get; set; }
-        [Required]
+       // [Required]
         public int PhoneNumber { get; set; }
-        [Required]
+       // [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        [Required]
+        //[Required]
         public Address Address { get; set; }
         public List<SurveyUser> SurveyUsers { get; set; }
 
