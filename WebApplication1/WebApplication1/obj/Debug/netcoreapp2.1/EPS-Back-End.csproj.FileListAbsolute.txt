@@ -1,0 +1,14 @@
+C:\Users\Mehmet\source\repos\DataFuelledJobs\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\EPS-Back-End.deps.json
+C:\Users\Mehmet\source\repos\DataFuelledJobs\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\EPS-Back-End.runtimeconfig.json
+C:\Users\Mehmet\source\repos\DataFuelledJobs\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\EPS-Back-End.runtimeconfig.dev.json
+C:\Users\Mehmet\source\repos\DataFuelledJobs\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\EPS-Back-End.dll
+C:\Users\Mehmet\source\repos\DataFuelledJobs\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\EPS-Back-End.pdb
+C:\Users\Mehmet\source\repos\DataFuelledJobs\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\EPS-Back-End.csprojAssemblyReference.cache
+C:\Users\Mehmet\source\repos\DataFuelledJobs\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\EPS-Back-End.csproj.CoreCompileInputs.cache
+C:\Users\Mehmet\source\repos\DataFuelledJobs\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\EPS-Back-End.RazorAssemblyInfo.cache
+C:\Users\Mehmet\source\repos\DataFuelledJobs\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\EPS-Back-End.RazorAssemblyInfo.cs
+C:\Users\Mehmet\source\repos\DataFuelledJobs\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\EPS-Back-End.AssemblyInfoInputs.cache
+C:\Users\Mehmet\source\repos\DataFuelledJobs\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\EPS-Back-End.AssemblyInfo.cs
+C:\Users\Mehmet\source\repos\DataFuelledJobs\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\EPS-Back-End.RazorTargetAssemblyInfo.cache
+C:\Users\Mehmet\source\repos\DataFuelledJobs\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\EPS-Back-End.dll
+C:\Users\Mehmet\source\repos\DataFuelledJobs\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\EPS-Back-End.pdb
