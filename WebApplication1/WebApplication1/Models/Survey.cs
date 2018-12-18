@@ -13,6 +13,7 @@ namespace WebApplication1.Models
         public string Name { get; set; }
         [Required]
         public string Description { get; set; }
+        public int Income { get; set; }
         [Required]
         public Company Company { get; set; }
         public DateTime StartDate { get; set; }

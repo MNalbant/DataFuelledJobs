@@ -10,8 +10,8 @@ using WebApplication1.Models;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20181122125256_Initial2")]
-    partial class Initial2
+    [Migration("20181217133617_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,13 +27,16 @@ namespace WebApplication1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Addition");
+                    b.Property<string>("Addition")
+                        .IsRequired();
 
-                    b.Property<string>("Name");
+                    b.Property<int>("HouseNumber");
 
-                    b.Property<int>("Number");
+                    b.Property<string>("StreetName")
+                        .IsRequired();
 
-                    b.Property<string>("ZipCode");
+                    b.Property<string>("ZipCode")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -50,7 +53,8 @@ namespace WebApplication1.Migrations
 
                     b.Property<int?>("QuestionId");
 
-                    b.Property<string>("_ClosedAnswer");
+                    b.Property<string>("_ClosedAnswer")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -65,7 +69,8 @@ namespace WebApplication1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -80,9 +85,11 @@ namespace WebApplication1.Migrations
 
                     b.Property<int?>("Question");
 
-                    b.Property<string>("UserResponse");
+                    b.Property<string>("UserResponse")
+                        .IsRequired();
 
-                    b.Property<string>("_OpenAnswer");
+                    b.Property<string>("_OpenAnswer")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -99,9 +106,12 @@ namespace WebApplication1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("QustionType");
+
                     b.Property<int?>("SurveyId");
 
-                    b.Property<string>("_Question");
+                    b.Property<string>("_Question")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -116,13 +126,17 @@ namespace WebApplication1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CompanyId");
+                    b.Property<int>("CompanyId");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
                     b.Property<DateTime>("EndDate");
 
-                    b.Property<string>("Name");
+                    b.Property<int>("Income");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<DateTime>("StartDate");
 
@@ -198,7 +212,8 @@ namespace WebApplication1.Migrations
                 {
                     b.HasOne("WebApplication1.Models.Company", "Company")
                         .WithMany()
-                        .HasForeignKey("CompanyId");
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("WebApplication1.Models.SurveyUser", b =>
